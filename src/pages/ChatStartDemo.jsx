@@ -3,7 +3,6 @@ import { useState } from 'react';
 export default function ChatStartDemo({ onBack }) {
   const [selectedOption, setSelectedOption] = useState('Past papers');
   const [selectedYear, setSelectedYear] = useState('2025');
-  const [hasSelectedPastYear, setHasSelectedPastYear] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState('Western Province');
   const [expandedProvince, setExpandedProvince] = useState(null);
 
@@ -45,7 +44,6 @@ export default function ChatStartDemo({ onBack }) {
 
   const handlePastPaperYearSelect = (year) => {
     setSelectedYear(year);
-    setHasSelectedPastYear(true);
   };
 
   const handlePastPaperTypeOpen = (paperType) => {
@@ -112,47 +110,45 @@ export default function ChatStartDemo({ onBack }) {
               Years are listed from 2025 at the top down to 2000 at the bottom.
             </div>
 
-            {hasSelectedPastYear && (
-              <div style={{ marginTop: '0.8rem' }}>
-                <div style={{ color: 'var(--white-50)', fontSize: '0.82rem', marginBottom: '0.45rem' }}>
-                  Choose paper type for {selectedYear}:
-                </div>
-                <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-                  <button
-                    type="button"
-                    onClick={() => handlePastPaperTypeOpen('mcq')}
-                    style={{
-                      padding: '0.5rem 0.85rem',
-                      borderRadius: '10px',
-                      border: '0.5px solid rgba(123,92,240,0.45)',
-                      background: 'rgba(123,92,240,0.2)',
-                      color: 'var(--white)',
-                      cursor: 'pointer',
-                      fontSize: '0.82rem',
-                      fontWeight: 600
-                    }}
-                  >
-                    MCQ paper
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handlePastPaperTypeOpen('essay')}
-                    style={{
-                      padding: '0.5rem 0.85rem',
-                      borderRadius: '10px',
-                      border: '0.5px solid rgba(0,212,255,0.45)',
-                      background: 'rgba(0,212,255,0.15)',
-                      color: 'var(--white)',
-                      cursor: 'pointer',
-                      fontSize: '0.82rem',
-                      fontWeight: 600
-                    }}
-                  >
-                    Essay paper
-                  </button>
-                </div>
+            <div style={{ marginTop: '0.8rem' }}>
+              <div style={{ color: 'var(--white-50)', fontSize: '0.82rem', marginBottom: '0.45rem' }}>
+                Choose paper type for {selectedYear}:
               </div>
-            )}
+              <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={() => handlePastPaperTypeOpen('mcq')}
+                  style={{
+                    padding: '0.5rem 0.85rem',
+                    borderRadius: '10px',
+                    border: '0.5px solid rgba(123,92,240,0.45)',
+                    background: 'rgba(123,92,240,0.2)',
+                    color: 'var(--white)',
+                    cursor: 'pointer',
+                    fontSize: '0.82rem',
+                    fontWeight: 600
+                  }}
+                >
+                  MCQ paper
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handlePastPaperTypeOpen('essay')}
+                  style={{
+                    padding: '0.5rem 0.85rem',
+                    borderRadius: '10px',
+                    border: '0.5px solid rgba(0,212,255,0.45)',
+                    background: 'rgba(0,212,255,0.15)',
+                    color: 'var(--white)',
+                    cursor: 'pointer',
+                    fontSize: '0.82rem',
+                    fontWeight: 600
+                  }}
+                >
+                  Essay paper
+                </button>
+              </div>
+            </div>
 
             {!selectedYearPaperLinks?.mcq && !selectedYearPaperLinks?.essay && (
               <div style={{ color: 'var(--white-50)', fontSize: '0.82rem', marginTop: '0.25rem' }}>
@@ -261,7 +257,6 @@ export default function ChatStartDemo({ onBack }) {
                 setSelectedOption(option);
                 if (option !== 'Past papers') {
                   setSelectedYear('2025');
-                  setHasSelectedPastYear(false);
                 }
                 if (option !== 'Provincial papers') {
                   setSelectedProvince('Western Province');
