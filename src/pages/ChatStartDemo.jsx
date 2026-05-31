@@ -107,7 +107,7 @@ export default function ChatStartDemo({ onBack }) {
           <div style={{ marginTop: '0.9rem', color: 'var(--white-80)', fontSize: '0.9rem', lineHeight: 1.6 }}>
             Showing past papers for <strong style={{ color: 'var(--white)' }}>{selectedYear}</strong>.
             <div style={{ color: 'var(--white-50)', fontSize: '0.82rem', marginTop: '0.25rem' }}>
-              Years are listed from 2025 at the top down to 2000 at the bottom.
+              Years are listed from 2025 at the top down to 2010 at the bottom.
             </div>
 
             <div style={{ marginTop: '0.8rem' }}>
