@@ -55,6 +55,7 @@ export default function ChatStartDemo({ onBack }) {
       window.open(paperLink, '_blank', 'noopener,noreferrer');
     }
   };
+  const [yearDropdownFocused, setYearDropdownFocused] = useState(false);
 
   const renderSelectionPanel = () => {
     if (selectedOption === 'Past papers') {
@@ -63,26 +64,47 @@ export default function ChatStartDemo({ onBack }) {
           <div style={{ fontSize: '0.78rem', color: 'var(--white-50)', marginBottom: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
             Choose year
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(88px, 1fr))', gap: '0.6rem' }}>
-            {pastPaperYears.map((year) => (
-              <button
-                key={year}
-                type="button"
-                onClick={() => handlePastPaperYearSelect(year)}
+          <div style={{ display: 'block', gap: '0.6rem' }}>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--white-50)', fontSize: '0.82rem' }}>Select year</label>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <select
+                value={selectedYear}
+                onChange={(e) => handlePastPaperYearSelect(e.target.value)}
+                onFocus={() => setYearDropdownFocused(true)}
+                onBlur={() => setYearDropdownFocused(false)}
                 style={{
-                  padding: '0.7rem 0.8rem',
-                  borderRadius: '12px',
-                  border: selectedYear === year ? '0.5px solid rgba(123,92,240,0.5)' : '0.5px solid rgba(255,255,255,0.12)',
-                  background: selectedYear === year ? 'rgba(123,92,240,0.22)' : 'rgba(255,255,255,0.05)',
+                  width: '100%',
+                  maxWidth: '260px',
+                  padding: '0.85rem 2.8rem 0.85rem 0.9rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(123,92,240,0.25)',
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))',
+                  backdropFilter: 'blur(6px)',
+                  WebkitBackdropFilter: 'blur(6px)',
                   color: 'var(--white)',
-                  cursor: 'pointer',
-                  fontSize: '0.88rem',
-                  fontWeight: 600
+                  fontSize: '0.95rem',
+                  appearance: 'none',
+                  WebkitAppearance: 'none',
+                  boxShadow: yearDropdownFocused ? '0 8px 30px rgba(123,92,240,0.18), inset 0 -2px 10px rgba(0,0,0,0.4)' : '0 8px 20px rgba(0,0,0,0.35)'
                 }}
               >
-                {year}
-              </button>
-            ))}
+                {pastPaperYears.map((year) => (
+                  <option key={year} value={year} style={{ background: '#07070d', color: '#fff' }}>{year}</option>
+                ))}
+              </select>
+
+              <div style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="g1" x1="0" x2="1">
+                      <stop offset="0%" stopColor="#7B5CF0" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#00D4FF" stopOpacity="1" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M6 9l6 6 6-6" stroke="url(#g1)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
           </div>
           <div style={{ marginTop: '0.9rem', color: 'var(--white-80)', fontSize: '0.9rem', lineHeight: 1.6 }}>
             Showing past papers for <strong style={{ color: 'var(--white)' }}>{selectedYear}</strong>.
